@@ -1,5 +1,4 @@
-http00.json: compile pass,digit accuracy
-http01.json: business sale
-http02.json: correct timer
-http03.json: remove duplication
-http04.json: performance enhancement
+http00.json: testcase
+http01.json: testcase
+http02.json: testcase
+http03.json: testcase
