@@ -2,6 +2,8 @@ package com.coffeeShop.service.interceptor;
 
 import com.coffeeShop.service.support.RedisMockRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 import org.springframework.web.method.HandlerMethod;
@@ -24,10 +26,12 @@ public class PerformanceInterceptor implements HandlerInterceptor {
     RedisMockRepository redisMockRepository;
     private StopWatch eachRequestStopWatch = new StopWatch();
     private StopWatch totalStopWatch = new StopWatch();
+    Logger logger = LoggerFactory.getLogger(PerformanceInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (redisMockRepository == null) {
+            logger.error("PerformanceInterceptor -  redisMockRepository is null");
             throw new RuntimeException("can not autowire redisMockRepository");
         }
 
