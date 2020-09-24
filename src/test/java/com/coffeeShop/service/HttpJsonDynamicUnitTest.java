@@ -214,12 +214,12 @@ public class HttpJsonDynamicUnitTest {
                                                     try {
                                                         if (statusCode.equals("201")) {
                                                             this.totalCoffeeOrdered++;
-
+                                                            Long id = Long.valueOf(request.get("url").toString().split("/")[3].replace("\"",""));
                                                             String creationTimestamp = DateTimeHelper.getCurrentTimestamp();
                                                             Long creationTimeEpoch = DateTimeHelper.getEpochSecond(creationTimestamp);
 
-                                                            this.creationAndModificationTimestamp.put(this.totalCoffeeOrdered, new Pair(creationTimestamp, ""));
-                                                            this.creationAndModificationEpochSecond.put(this.totalCoffeeOrdered, new Pair(creationTimeEpoch, 0L));
+                                                            this.creationAndModificationTimestamp.put(id, new Pair(creationTimestamp, ""));
+                                                            this.creationAndModificationEpochSecond.put(id, new Pair(creationTimeEpoch, 0L));
                                                         }
 
                                                         ResultActions resultActions = mockMvc.perform(post(url)

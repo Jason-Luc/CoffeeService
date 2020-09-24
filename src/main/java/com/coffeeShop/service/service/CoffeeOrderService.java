@@ -74,8 +74,7 @@ public class CoffeeOrderService {
             List<Double> items = Stream.of(coffee).map(c -> c.getPrice())
                     .collect(Collectors.toList());
             Double sum = items.stream().mapToDouble(Double::doubleValue).sum();
-            return Double.valueOf(BigDecimal.valueOf(sum).multiply(BigDecimal.valueOf(0.85)).setScale(2, RoundingMode.HALF_UP).doubleValue());
-
+            return sum;
     }
 
     public CoffeeOrder updateState(CoffeeOrder order, OrderState state) {
