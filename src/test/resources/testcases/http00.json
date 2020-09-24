@@ -1,0 +1,3 @@
+{"request": {"method": "POST", "url": "/order/create/1020200901", "headers": {"Content-Type": "application/json"}, "body": {"customer" :"Peter", "items":["espresso","latte"]}}, "response": {"status_code": 201, "body": {}, "headers": {}}}
+{"request": {"method": "PUT", "url": "/order/pay", "headers": {"Content-Type": "application/json"}, "body": { "id":1020200901,"state":"PAID" }}, "response": {"status_code": 202, "body": {}, "headers": {}}}
+{"request": {"method": "GET", "url": "/order/1020200901", "headers": {"Content-Type": "application/json"}, "body": {}}, "response": {"status_code": 200, "body": [{"id":1020200901,"customer":"Peter","state":"PAID","total":39.5}], "headers": {"Content-Type": "application/json"}}}
