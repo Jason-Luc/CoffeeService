@@ -8,7 +8,7 @@ create table t_coffee
     create_time timestamp,
     update_time timestamp,
     name        varchar(255),
-    price       bigint,
+    price       double,
     primary key (id)
 );
 
@@ -20,7 +20,7 @@ create table t_order
     customer    varchar(255),
     state       integer not null,
     discount    integer,
-    total       bigint,
+    total       double,
     waiter      varchar(255),
     barista     varchar(255),
     primary key (id)

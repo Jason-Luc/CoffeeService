@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +48,8 @@ public class CoffeeOrderService {
     }
 
     public CoffeeOrder createOrder(Long id, String customer, Coffee... coffee) {
+
+
         CoffeeOrder order = CoffeeOrder.builder()
                 .id(id)
                 .customer(customer)
@@ -65,11 +68,14 @@ public class CoffeeOrderService {
     }
 
 
-    private Money calcTotal(Coffee[] coffee) {
-            List<Money> items = Stream.of(coffee).map(c -> c.getPrice())
+    private Double calcTotal(Coffee[] coffee) {
+
+
+            List<Double> items = Stream.of(coffee).map(c -> c.getPrice())
                     .collect(Collectors.toList());
-            return Money.total(items).multipliedBy(discount)
-                    .dividedBy(100, RoundingMode.HALF_UP);
+            Double sum = items.stream().mapToDouble(Double::doubleValue).sum();
+            return Double.valueOf(BigDecimal.valueOf(sum).multiply(BigDecimal.valueOf(0.85)).setScale(2, RoundingMode.HALF_UP).doubleValue());
+
     }
 
     public CoffeeOrder updateState(CoffeeOrder order, OrderState state) {

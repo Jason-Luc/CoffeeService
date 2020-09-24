@@ -90,11 +90,11 @@ public class CoffeeOrder  implements Serializable {
         this.discount = discount;
     }
 
-    public Money getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Money total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
@@ -122,9 +122,7 @@ public class CoffeeOrder  implements Serializable {
     @Column(nullable = false)
     private OrderState state;
     private Integer discount;
-    @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyMinorAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "CNY")})
-    private Money total;
+    private Double total;
     private String waiter;
     private String barista;
 
