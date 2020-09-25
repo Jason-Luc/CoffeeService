@@ -1,4 +1,4 @@
-CoffeeService Test Description
+CoffeeService Program Test Description
 
 - The application provides some APIs for the coffee shop. In this coffee shop，customer can make a coffee order request and pay for the order
 - Barista would receive coffee order requests and start making coffee once customer has paid for the order.
