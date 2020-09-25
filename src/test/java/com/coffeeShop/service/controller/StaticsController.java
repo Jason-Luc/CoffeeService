@@ -49,7 +49,7 @@ public class StaticsController {
         Long totalHTTPRequestLatency = calcTotalHTTPRequestLatency();
         Boolean result = (maxCoffeeLatency < FIVE_SECONDS) && (totalHTTPRequestLatency < TWO_SECONDS);
         if (!result) {
-            log.info("checkCustomerWaitingLatency failed because maxCoffeeLatency {} >= 5 secs or totalHTTPRequestLatency {} >=2 seconds");
+            log.error("checkCustomerWaitingLatency failed because maxCoffeeLatency {} >= 5000 ms or totalHTTPRequestLatency {} >=2000 ms", maxCoffeeLatency, totalHTTPRequestLatency);
         }
         return Arrays.asList(result);
     }

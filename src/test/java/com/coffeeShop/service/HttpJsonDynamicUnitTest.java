@@ -367,9 +367,11 @@ public class HttpJsonDynamicUnitTest {
 
     private boolean validateStatusCode(String filename, String testcase, String expected, String found) {
         if (!expected.equals(found)) {
-            String reason = "Status code";
+            String reason = "HTTP Status code mismatch";
+            if(expected.equals("400")){
+                reason= reason +": Bad request of ordering coffee";
+            }
             addTestFailure(filename, new Pair(new Pair(testcase, reason), new Pair(expected, found)));
-
             return false;
         }
 
@@ -417,8 +419,10 @@ public class HttpJsonDynamicUnitTest {
 
                     if (!expectedJson.equals(foundJson)) {
                         String reason = String.format("Response Json (at index %d) does not match with the expected Json", i);
+                        if(testcase.contains("checkCustomerWaitingLatency")){
+                            reason="Max coffee latency is longer than 5 seconds or total HTTP Request latency is longer than 2 seconds";
+                        }
                         addTestFailure(filename, new Pair(new Pair(testcase, reason), new Pair(expectedJson.toString(), foundJson.toString())));
-
                         return false;
                     }
                 }
