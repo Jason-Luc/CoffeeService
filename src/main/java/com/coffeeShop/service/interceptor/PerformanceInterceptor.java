@@ -43,8 +43,7 @@ public class PerformanceInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        eachRequestStopWatch.stop();
-        eachRequestStopWatch.start();
+
     }
 
     @Override
@@ -58,9 +57,8 @@ public class PerformanceInterceptor implements HandlerInterceptor {
             String methodName = ((HandlerMethod) handler).getMethod().getName();
             method = beanType + "." + methodName;
         }
-        log.info("{};{};{};{};{}ms;{}ms;{}ms", request.getRequestURI(), method,
+        log.info("{};{};{};{};{}ms;{}ms", request.getRequestURI(), method,
                 response.getStatus(), ex == null ? "-" : ex.getClass().getSimpleName(),
-                sw.getTotalTimeMillis(), sw.getTotalTimeMillis() - sw.getLastTaskTimeMillis(),
                 sw.getLastTaskTimeMillis());
 
         updateEachRequestTimeCost(request.getRequestURI(), sw);
