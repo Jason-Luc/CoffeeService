@@ -42,14 +42,14 @@ public class StaticsController {
     }
 
 
-    @RequestMapping(value = "/checkCustomerWaitingLatency", method = RequestMethod.GET)
-    public List<Boolean> checkCustomerWaitingLatency() {
+    @RequestMapping(value = "/checkCustomerWaitingTime", method = RequestMethod.GET)
+    public List<Boolean> checkCustomerWaitingTime() {
         finishAllOrders();
-        Long maxCoffeeLatency = calcMaxCoffeeLatency();
+        Long maxCoffeeTime = calcMaxCoffeeProcessingTime();
         Long totalHTTPRequestLatency = calcTotalHTTPRequestLatency();
-        Boolean result = (maxCoffeeLatency < FIVE_SECONDS) && (totalHTTPRequestLatency < TWO_SECONDS);
+        Boolean result = (maxCoffeeTime < FIVE_SECONDS);
         if (!result) {
-            log.error("checkCustomerWaitingLatency failed because maxCoffeeLatency {} >= 5000 ms or totalHTTPRequestLatency {} >=2000 ms", maxCoffeeLatency, totalHTTPRequestLatency);
+            log.error("checkCustomerWaitingTime failed because maxCoffeeTime {} >= 5000 ms", maxCoffeeTime);
         }
         return Arrays.asList(result);
     }
@@ -94,7 +94,7 @@ public class StaticsController {
         return getTotalTime(EACH_REQUEST_TIME_COST_REDIS_KEY);
     }
 
-    private Long calcMaxCoffeeLatency() {
+    private Long calcMaxCoffeeProcessingTime() {
         return getMaxTime(EACH_COFFEE_TIME_COST_REDIS_KEY);
     }
 
@@ -104,7 +104,7 @@ public class StaticsController {
         Long totalTime = Long.valueOf(-1);
         List<Map<String, Long>> eachRequestTimeCostList = (List) (redisRepository.mockRepository.get(redisKey));
 
-        log.info("for each HTTP request, latency of each:");
+        log.info("for each HTTP request latency（ms）： ");
         for (Map<String, Long> eachMap : eachRequestTimeCostList) {
             for (Map.Entry<String, Long> entry : eachMap.entrySet()) {
                 log.info("       {} :  {}", entry.getKey(), entry.getValue());

@@ -419,8 +419,8 @@ public class HttpJsonDynamicUnitTest {
 
                     if (!expectedJson.equals(foundJson)) {
                         String reason = String.format("Response Json (at index %d) does not match with the expected Json", i);
-                        if(testcase.contains("checkCustomerWaitingLatency")){
-                            reason="Max coffee latency is longer than 5 seconds or total HTTP Request latency is longer than 2 seconds";
+                        if(testcase.contains("checkCustomerWaitingTime")){
+                            reason="Max coffee processing time is longer than 5 seconds...";
                         }
                         addTestFailure(filename, new Pair(new Pair(testcase, reason), new Pair(expectedJson.toString(), foundJson.toString())));
                         return false;

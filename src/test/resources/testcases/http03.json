@@ -8,4 +8,4 @@
 {"request": {"method": "PUT", "url": "/order/pay", "headers": {"Content-Type": "application/json"}, "body": { "id":1020200909,"state":"PAID" }}, "response": {"status_code": 202, "body": {}, "headers": {}}}
 {"request": {"method": "POST", "url": "/order/create/1020200910", "headers": {"Content-Type": "application/json"}, "body": {"customer" :"Harry", "items":["espresso","latte"]}}, "response": {"status_code": 201, "body": {}, "headers": {}}}
 {"request": {"method": "PUT", "url": "/order/pay", "headers": {"Content-Type": "application/json"}, "body": { "id":1020200910,"state":"PAID" }}, "response": {"status_code": 202, "body": {}, "headers": {}}}
-{"request": {"method": "GET", "url": "/statics/checkCustomerWaitingLatency", "headers": {"Content-Type": "application/json"}, "body": {}}, "response": {"status_code": 200, "body": [true], "headers": {"Content-Type": "application/json"}}}
+{"request": {"method": "GET", "url": "/statics/checkCustomerWaitingTime", "headers": {"Content-Type": "application/json"}, "body": {}}, "response": {"status_code": 200, "body": [true], "headers": {"Content-Type": "application/json"}}}
