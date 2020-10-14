@@ -8,6 +8,7 @@ import com.coffeeShop.service.support.RedisMockRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -30,7 +31,7 @@ public class Barista {
     public Barista(MessageQueue messageQueue) {
         this.messageQueue = messageQueue;
     }
-
+@Transactional
     public void makeCoffee() {
 
         CoffeeOrder order = messageQueue.mockQueue.poll();
@@ -40,7 +41,7 @@ public class Barista {
                 Thread.sleep(THREE_SECONDS);
                 log.info("Coffee #{} ready, {} pending", order.getId(), messageQueue.mockQueue.size());
                 order.setState(OrderState.DONE);
-                orderRepository.save(order);
+                orderRepository.saveAndFlush(order);
                 CoffeeOrder coffeeOrder = orderRepository.getOne(order.getId());
                 updateEachCoffeeTimeCost(coffeeOrder);
                 allBrewedCoffee++;
