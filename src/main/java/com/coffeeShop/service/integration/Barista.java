@@ -30,6 +30,7 @@ public class Barista {
 
     public Barista(MessageQueue messageQueue) {
         this.messageQueue = messageQueue;
+        this.messageQueue.setQueueSize(10);
     }
 @Transactional
     public void makeCoffee() {

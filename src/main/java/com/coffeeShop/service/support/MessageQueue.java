@@ -1,21 +1,20 @@
 package com.coffeeShop.service.support;
 
-import com.coffeeShop.service.integration.Barista;
 import com.coffeeShop.service.model.CoffeeOrder;
 import org.springframework.stereotype.Component;
 
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 @Component
 public class MessageQueue {
 
-    public static Queue<CoffeeOrder> mockQueue;
+    public static LinkedBlockingQueue<CoffeeOrder> mockQueue;
 
-    public MessageQueue(Barista barista) {
-        mockQueue = new LinkedBlockingDeque<>(barista.baristaCount*10);
+    public MessageQueue() {
+
     }
-    public void setQueueSize(int size){
 
+    public void setQueueSize(int size) {
+        mockQueue = new LinkedBlockingQueue<>(size);
     }
 }
